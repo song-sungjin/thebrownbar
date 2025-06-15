@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Brown Bar - 매장소개</title>
+    <style>
+        p{
+            font-size: 20px;
+        }
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+            color: #f1f1f1;
+        }
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #000000;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            height: 50px;
+        }
+        .brand a {
+            font-size: 1.8em;
+            color: #f1f1f1;
+            text-decoration: none;
+            font-weight: bold;
+            letter-spacing: 1px;
+            color: #7a4b3b;
+        }
+        .brand a:hover {
+            color: #f1f1f1;
+        }
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #f1f1f1;
+            font-size: 2em;
+            cursor: pointer;
+            padding: 5px;
+            margin-left: auto;
+            margin-right: 30px;
+        }
+        .navbar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50px;
+            margin-right: 30px;
+        }
+        .navbar ul.main-menu {
+            height: auto;
+        }
+        .navbar li {
+            margin: 0 20px;
+        }
+        .navbar a {
+            color: #f1f1f1;
+            text-decoration: none;
+            font-size: 1.2em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .navbar a:hover {
+            color: #7a4b3b;
+        }
+        header {
+            background-image: url('basic/headerimg.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 50px 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            margin-top: 50px;
+        }
+        header img {
+            max-width: 220px;
+            width: 100%;
+            height: auto;
+        }
+        section {
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .slideshow-container {
+            position: relative;
+            max-width: 500px;
+            margin: 30px auto;
+        }
+        .slide {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            padding: 16px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 50%;
+            transform: translateY(-50%);
+        }
+        .prev {
+            left: 0;
+        }
+        .next {
+            right: 0;
+        }
+        .slide img {
+            width: 80%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        .dot-container {
+            text-align: center;
+            padding: 20px 0;
+        }
+        .dot {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            margin: 0 5px;
+            background-color: white;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+        .active-dot {
+            background-color: #A3C9FF;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #1a1a1a;
+            color: #ccc;
+        }
+        @media (max-width: 800px) {
+            .slide img {
+                width: 60%;
+            }
+            .navbar {
+                flex-wrap: wrap;
+            }
+            .navbar ul.main-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 50px;
+                left: 0;
+                width: 100%;
+                background-color: #000000;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+                padding: 10px 0;
+                z-index: 999;
+                text-align: center;
+            }
+            .navbar ul.main-menu.active {
+                display: flex;
+                justify-content: flex-start;
+                align-items: flex-start;
+                padding-left: 20px;
+            }
+            .navbar ul.main-menu li {
+                margin: 10px 0;
+                width: 100%;
+                text-align: left;
+            }
+            .navbar a {
+                font-size: 1.1em;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            h1 {
+                font-size: 2.5em;
+                letter-spacing: 2px;
+            }
+            h3 {
+                font-size: 1em;
+                word-break: keep-all;
+                padding: 0 10px;
+            }
+            .slideshow-container {
+                max-width: 90%;
+                margin: 30px auto;
+            }
+            .prev, .next {
+                padding: 10px;
+                font-size: 1.2em;
+            }
+        }
+        @media (max-width: 480px) {
+            .brand a {
+                font-size: 1.5em;
+                letter-spacing: 0.5px;
+            }
+            .navbar a {
+                font-size: 1em;
+            }
+            h1 {
+                font-size: 1.5em;
+            }
+            h2{
+                font-size: 1.1em;
+            }
+            h3 {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <div class="brand">
+            <a href="main.html">THE BROWN BAR</a>
+        </div>
+        <button class="menu-toggle" id="menuToggle">☰</button>
+        <ul class="main-menu" id="mainMenu">
+            <li><a href="introduce.html" style="color: #7a4b3b;"><b>매장소개</b></a></li>
+            <li><a href="menu.html"><b>메뉴</b></a></li>
+            <li><a href="news.html"><b>새소식</b></a></li>
+            <li><a href="location.html"><b>오시는길</b></a></li>
+            <li><a href="words.html"><b>바텐더의 말</b></a></li>
+        </ul>
+    </div>
+
+    <header>
+        <a href="main.html">
+            <img src="basic/logo.jpg" alt="The Brown Bar Logo">
+        </a>
+    </header>
+    <h1 style="text-align:center;">매장소개</h1>
+
+    <section>
+        <p style="text-align: center;">
+            <b>밖에서 사 먹기 비싸고 맛이 없어 직접 취미로 만든 바 '더 브라운 바'를 소개합니다</b><br><br><br>
+            재즈 음악의 감미로운 선율과 모던한 인테리어가 어우러지는 '더 브라운 바'는 고급스러움과 편안함을 동시에 제공합니다.<br><br>
+            또한 저희 바에서는 세련된 분위기 속에서 최고의 음료와 서비스를 즐기며, 부담 없는 가격으로 특별한 시간을 보내실 수 있습니다. <br><br>
+            여유로운 저녁, 특별한 한잔을 마시며 멋진 순간을 보내고 싶다면, '더 브라운 바'가 바로 그곳입니다.<br><br>
+        </p>
+    </section>
+
+    <div class="slideshow-container">
+        <div class="slide active">
+            <img src="introslide/intros1.png" alt="Slide 1">
+        </div>
+        <div class="slide">
+            <img src="introslide/intros2.png" alt="Slide 2">
+        </div>
+        <div class="slide">
+            <img src="introslide/intros3.png" alt="Slide 3">
+        </div>
+
+        <button class="prev" onclick="changeSlide(-1)">❮</button>
+        <button class="next" onclick="changeSlide(1)">❯</button>
+    </div>
+
+    <div class="dot-container">
+        <span class="dot" onclick="goToSlide(0)"></span>
+        <span class="dot" onclick="goToSlide(1)"></span>
+        <span class="dot" onclick="goToSlide(2)"></span>
+    </div>
+
+    <section>
+        <h3>⦁ 위치</h3>
+        <p style="text-align: center;">서울 은평구 진흥로 29 지하1층<br><br></p>
+        <h3>⦁ 운영시간</h3>
+        <p style="text-align: center;">월 ~ 목요일 20:00 ~ 24:00<br><br>금 ~ 토요일 20:00 ~ 01:00<br><br>*매주 일요일 휴무</p>
+    </section>
+
+    <div class="footer">
+        <p>© 2025 The Brown Bar. All rights reserved.</p>
+    </div>
+
+    <script>
+        let currentSlideIndex = 0;
+        let slideInterval;
+
+        function showSlide(index) {
+            const slides = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.dot');
+            if (index >= slides.length) currentSlideIndex = 0;
+            if (index < 0) currentSlideIndex = slides.length - 1;
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                if (i === currentSlideIndex) {
+                    slide.classList.add('active');
+                }
+            });
+            dots.forEach((dot, i) => {
+                dot.classList.remove('active-dot');
+                if (i === currentSlideIndex) {
+                    dot.classList.add('active-dot');
+                }
+            });
+        }
+        function changeSlide(step) {
+            currentSlideIndex += step;
+            showSlide(currentSlideIndex);
+            resetInterval();
+        }
+        function goToSlide(index) {
+            currentSlideIndex = index;
+            showSlide(currentSlideIndex);
+            resetInterval();
+        }
+        function startSlideShow() {
+            slideInterval = setInterval(() => {
+                currentSlideIndex++;
+                showSlide(currentSlideIndex);
+            }, 5000);
+        }
+        function resetInterval() {
+            clearInterval(slideInterval);
+            startSlideShow();
+        }
+        showSlide(0);
+        startSlideShow();
+        const menuToggle = document.getElementById('menuToggle');
+        const mainMenu = document.getElementById('mainMenu');
+        menuToggle.addEventListener('click', () => {
+            mainMenu.classList.toggle('active');
+        });
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 800) {
+                mainMenu.classList.remove('active');
+            }
+        });
+    </script>
+
+</body>
+</html>

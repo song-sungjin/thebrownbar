@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Brown Bar - 메뉴</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+            color: #f1f1f1;
+        }
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #000000;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            height: 50px;
+        }
+        .brand a {
+            font-size: 1.8em;
+            color: #7a4b3b;
+            text-decoration: none;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .brand a:hover {
+            color: #f1f1f1;
+        }
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #f1f1f1;
+            font-size: 2em;
+            cursor: pointer;
+            padding: 5px;
+            margin-left: auto;
+            margin-right: 30px;
+        }
+        .navbar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50px;
+            margin-right: 30px;
+        }
+        .navbar ul.main-menu {
+            height: auto;
+        }
+        .navbar li {
+            margin: 0 20px;
+        }
+        .navbar a {
+            color: #f1f1f1;
+            text-decoration: none;
+            font-size: 1.2em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .navbar a:hover {
+            color: #7a4b3b;
+        }
+        header {
+            background-image: url('basic/headerimg.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 50px 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            margin-top: 50px;
+        }
+         header img {
+            max-width: 220px;
+            width: 100%;
+            height: auto;
+        }
+        h3 {
+            text-align: center;
+            font-size: 1em;
+            word-break: keep-all;
+            padding: 0 10px;
+        }
+        section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            position: relative;
+        }
+        .menu-item {
+            position: relative;
+            width: 180px;
+            height: auto;
+            min-height: 180px;
+            margin: 10px;
+            background-color: #222;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            color: #f1f1f1;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .menu-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+        }
+        .menu-item img {
+            max-width: 80px;
+            max-height: 80px;
+            margin-bottom: 10px;
+        }
+        .menu-item h3 {
+            font-size: 1.1em;
+            margin-top: 0;
+            margin-bottom: 5px;
+        }
+        .menu-item .hashtags {
+            font-size: 0.75em;
+            color: #999;
+            word-break: keep-all;
+            line-height: 1.4;
+            margin: 5px 0;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+        }
+        .menu-item p {
+            font-size: 0.9em;
+            margin-top: 5px;
+            margin-bottom: 0;
+            color: #bbb;
+        }
+        .menu-item .signature-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background-color: #7a4b3b;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.7em;
+            font-weight: bold;
+        }
+        .category-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+            padding: 0 10px;
+        }
+        .category-buttons button {
+            background-color: #444;
+            color: #f1f1f1;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .category-buttons button:hover {
+            background-color: #7a4b3b;
+        }
+        .category-buttons button.active {
+            color: #7a4b3b;
+            font-weight: bold;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #1a1a1a;
+            color: #ccc;
+        }
+        .menu-category {
+            display: none;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .active-category {
+            display: flex;
+        }
+        .overlay-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 50;
+            display: none;
+        }
+        .overlay-image-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 100;
+            display: none;
+            max-width: 80%;
+            max-height: 80%;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            max-width: 900px;
+        }
+        .overlay-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            font-size: 2em;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 101;
+        }
+        .close-button:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        @media (max-width: 800px) {
+            .navbar {
+                flex-wrap: wrap;
+            }
+            .navbar ul.main-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 50px;
+                left: 0;
+                width: 100%;
+                background-color: #000000;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+                padding: 10px 0;
+                z-index: 999;
+                text-align: center;
+            }
+            .navbar ul.main-menu.active {
+                display: flex;
+                justify-content: flex-start;
+                align-items: flex-start;
+                padding-left: 20px;
+            }
+            .navbar ul.main-menu li {
+                margin: 10px 0;
+                width: 100%;
+                text-align: left;
+            }
+            .navbar a {
+                font-size: 1.1em;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            h1 {
+                font-size: 2.5em;
+                letter-spacing: 2px;
+            }
+            h3 {
+                font-size: 1em;
+                word-break: keep-all;
+                padding: 0 10px;
+            }
+            .menu-item {
+                width: calc(50% - 20px);
+                min-height: 150px;
+                padding: 10px;
+            }
+        }
+        @media (max-width: 480px) {
+            .brand a {
+                font-size: 1.5em;
+                letter-spacing: 0.5px;
+            }
+            .navbar a {
+                font-size: 1em;
+            }
+            h1 {
+                font-size: 1.5em;
+            }
+            h2{
+                font-size: 1.1em;
+            }
+            h3 {
+                font-size: 0.9em;
+            }
+            .menu-item {
+                width: calc(100% - 20px);
+                min-height: 120px;
+            }
+            .category-buttons button {
+                font-size: 0.9em;
+                padding: 8px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <div class="brand">
+            <a href="main.html">THE BROWN BAR</a>
+        </div>
+        <button class="menu-toggle" id="menuToggle">☰</button>
+        <ul class="main-menu" id="mainMenu">
+            <li><a href="introduce.html"><b>매장소개</b></a></li>
+            <li><a href="menu.html" style="color: #7a4b3b;"><b>메뉴</b></a></li>
+            <li><a href="news.html"><b>새소식</b></a></li>
+            <li><a href="location.html"><b>오시는길</b></a></li>
+            <li><a href="words.html"><b>바텐더의 말</b></a></li>
+        </ul>
+    </div>
+
+    <header>
+        <a href="main.html">
+            <img src="basic/logo.jpg" alt="The Brown Bar Logo">
+        </a>
+    </header>
+
+    <h1 style="text-align:center;">메뉴</h1>
+
+    <div class="category-buttons">
+        <button onclick="showCategory('cocktail', this)">칵테일</button>
+        <button onclick="showCategory('other-alcohol', this)">기타 주류</button>
+        <button onclick="showCategory('snacks', this)">사이드 메뉴</button><br>
+    </div>
+
+    <section>
+        <div id="cocktail" class="menu-category">
+            <div class="menu-item" onclick="showImage('menu/cocktail/BH.png')">
+                <span class="signature-badge">👑 Signature</span>
+                <img src="menu/cocktail/BH.png" alt="칵테일">
+                <h3>블루 하와이</h3>
+                <p class="hashtags">#블루큐라소 #코코넛럼 #코코넛밀크 #파인애플 #레몬</p>
+                <p>가격: 13,000원</p>
+            </div>
+            <div class="menu-item" onclick="showImage('menu/cocktail/MS.png')">
+                <img src="menu/cocktail/MS.png" alt="칵테일">
+                <h3>미도리 사워</h3>
+                <p class="hashtags">#멜론 #레몬 #스파클링 #새콤달콤</p>
+                <p>가격: 11,000원</p>
+            </div>
+            <div class="menu-item" onclick="showImage('menu/cocktail/PC.png')">
+                <img src="menu/cocktail/PC.png" alt="칵테일">
+                <h3>피치 크러시</h3>
+                <p class="hashtags">#복숭아 #시트러스 #크렌베리 #새콤달콤</p>
+                <p>가격: 10,000원</p>
+            </div>
+            <div class="menu-item" onclick="showImage('menu/cocktail/SB.png')">
+                <img src="menu/cocktail/SB.png" alt="칵테일">
+                <h3>시 브리즈</h3>
+                <p class="hashtags">#보드카 #자몽 #크렌베리 #청량 #산들바람</p>
+                <p>가격: 8,000원</p>
+            </div>
+            <div class="menu-item" onclick="showImage('menu/cocktail/BS.png')">
+                <img src="menu/cocktail/BS.png" alt="칵테일">
+                <h3>블루 사파이어</h3>
+                <p class="hashtags">#블루큐라소 #오렌지 #복숭아 #코코넛 #라임 #하늘</p>
+                <p>가격: 8,000원</p>
+            </div>
+        </div>
+
+        <div id="other-alcohol" class="menu-category">
+            <div class="menu-item" onclick="showImage('menu/alcoh/BN.png')">
+                <img src="menu/alcoh/BN.png" alt="기타주류">
+                <h3>블라드녹 (NAS)</h3>
+                <p>가격: 12,000원/(30ml)</p>
+            </div>
+            <div class="menu-item" onclick="showImage('menu/alcoh/BHB.png')">
+                <img src="menu/alcoh/BHB.png" alt="기타주류">
+                <h3>부나하벤 12년</h3>
+                <p>가격: 15,000원/(30ml)</p>
+            </div>
+            <div class="menu-item" onclick="showImage('menu/alcoh/8V.png')">
+                <img src="menu/alcoh/8V.png" alt="기타주류">
+                <h3>8밸리스 샤르도네</h3>
+                <p>가격: 38,000원/(1Bottle)</p>
+            </div>
+            <div class="menu-item" onclick="showImage('menu/alcoh/GG.png')">
+                <img src="menu/alcoh/GG.png" alt="기타주류">
+                <h3>글렌고인 12년</h3>
+                <p>가격: 10,000원/(30ml)</p>
+            </div>
+            <div class="menu-item" onclick="showImage('menu/alcoh/KS.png')">
+                <img src="menu/alcoh/KS.png" alt="기타주류">
+                <h3>코일레 싱글 빈야드 시라</h3>
+                <p>가격: 47,000원/(1Bottle)</p>
+            </div>
+        </div>
+
+        <div id="snacks" class="menu-category">
+            <div class="menu-item" onclick="showImage('menu/snack/BCP.png')">
+                <img src="menu/snack/BCP.png" alt="사이드메뉴">
+                <h3>베이컨 크림 파스타</h3>
+                <p>가격: 14,000원</p>
+            </div>
+            <div class="menu-item" onclick="showImage('menu/snack/CCC.png')">
+                <img src="menu/snack/CCC.png" alt="사이드메뉴">
+                <h3>크림 치즈 크래커</h3>
+                <p>가격: 5,000원</p>
+            </div>
+            <div class="menu-item" onclick="showImage('menu/snack/PB.png')">
+                <img src="menu/snack/PB.png" alt="사이드메뉴">
+                <h3>포크 바베큐</h3>
+                <p>가격: 19,000원</p>
+            </div>
+        </div>
+
+        <div class="overlay-background" id="overlay-background"></div>
+        <div class="overlay-image-container" id="overlay-container">
+            <img id="overlay-image" class="overlay-image" src="" alt="확대 이미지">
+            <button class="close-button" onclick="closeImage()">×</button>
+        </div>
+    </section>
+
+    <div class="footer">
+        <p>© 2025 The Brown Bar. All rights reserved.</p>
+    </div>
+
+    <script>
+        const overlayContainer = document.getElementById('overlay-container');
+        const overlayImage = document.getElementById('overlay-image');
+        const overlayBackground = document.getElementById('overlay-background');
+
+        function showCategory(category, clickedButton) {
+            document.querySelectorAll('.menu-category').forEach(cat => {
+                cat.classList.remove('active-category');
+            });
+            document.getElementById(category).classList.add('active-category');
+
+            document.querySelectorAll('.category-buttons button').forEach(button => {
+                button.classList.remove('active');
+            });
+            if (clickedButton) {
+                clickedButton.classList.add('active');
+            }
+        }
+
+        function showImage(imageSrc) {
+            overlayImage.src = imageSrc;
+            overlayContainer.style.display = 'block';
+            overlayBackground.style.display = 'block';
+        }
+
+        function closeImage() {
+            overlayContainer.style.display = 'none';
+            overlayBackground.style.display = 'none';
+        }
+
+        const menuToggle = document.getElementById('menuToggle');
+        const mainMenu = document.getElementById('mainMenu');
+        menuToggle.addEventListener('click', () => {
+            mainMenu.classList.toggle('active');
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 800) {
+                mainMenu.classList.remove('active');
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstButton = document.querySelector('.category-buttons button');
+            showCategory('cocktail', firstButton);
+        });
+    </script>
+
+</body>
+</html>

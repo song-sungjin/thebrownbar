@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Brown Bar - 바텐더의 말</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+            color: #f1f1f1;
+        }
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #000000;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            height: 50px;
+        }
+        .brand a {
+            font-size: 1.8em;
+            color: #7a4b3b;
+            text-decoration: none;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .brand a:hover {
+            color: #f1f1f1;
+        }
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #f1f1f1;
+            font-size: 2em;
+            cursor: pointer;
+            padding: 5px;
+            margin-left: auto;
+            margin-right: 30px;
+        }
+        .navbar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50px;
+            margin-right: 30px;
+        }
+        .navbar ul.main-menu {
+            height: auto;
+        }
+        .navbar li {
+            margin: 0 20px;
+        }
+        .navbar a {
+            color: #f1f1f1;
+            text-decoration: none;
+            font-size: 1.2em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .navbar a:hover {
+            color: #7a4b3b;
+        }
+        header {
+            background-image: url('basic/headerimg.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 50px 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            margin-top: 50px;
+        }
+         header img {
+            max-width: 220px;
+            width: 100%;
+            height: auto;
+        }
+        section {
+            display: flex;
+            justify-content: center;
+            text-align: left;
+            max-width: 800px;
+            width: 90%;
+            padding: 60px 20px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #1a1a1a;
+            color: #ccc;
+        }
+        @media (max-width: 800px) {
+            .navbar {
+                flex-wrap: wrap;
+            }
+            .navbar ul.main-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 50px;
+                left: 0;
+                width: 100%;
+                background-color: #000000;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+                padding: 10px 0;
+                z-index: 999;
+                text-align: center;
+            }
+            .navbar ul.main-menu.active {
+                display: flex;
+                justify-content: flex-start;
+                align-items: flex-start;
+                padding-left: 20px;
+            }
+            .navbar ul.main-menu li {
+                margin: 10px 0;
+                width: 100%;
+                text-align: left;
+            }
+            .navbar a {
+                font-size: 1.1em;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            h1 {
+                font-size: 2.5em;
+                letter-spacing: 2px;
+            }
+            h3 {
+                font-size: 1em;
+                word-break: keep-all;
+                padding: 0 10px;
+            }
+            section p {
+                font-size: 16px !important;
+            }
+        }
+        @media (max-width: 480px) {
+            .brand a {
+                font-size: 1.5em;
+                letter-spacing: 0.5px;
+            }
+            .navbar a {
+                font-size: 1em;
+            }
+            h1 {
+            font-size: 1.5em;
+            }
+            h2{
+            font-size: 1.1em;
+            }
+            h3 {
+            font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <div class="brand">
+            <a href="main.html">THE BROWN BAR</a>
+        </div>
+        <button class="menu-toggle" id="menuToggle">☰</button>
+        <ul class="main-menu" id="mainMenu">
+            <li><a href="introduce.html"><b>매장소개</b></a></li>
+            <li><a href="menu.html"><b>메뉴</b></a></li>
+            <li><a href="news.html"><b>새소식</b></a></li>
+            <li><a href="location.html"><b>오시는길</b></a></li>
+            <li><a href="words.html" style="color: #7a4b3b;"><b>바텐더의 말</b></a></li>
+        </ul>
+    </div>
+
+    <header>
+        <a href="main.html">
+            <img src="basic/logo.jpg" alt="The Brown Bar Logo">
+        </a>
+    </header>
+
+    <h1 style="text-align:center;">바텐더의 말</h1>
+
+    <section>
+        <p style="font-size: 18px;">안녕하세요! 저는 더 브라운 바의 바텐더입니다. 여러분께 제 바에 대해 소개할 수 있어 정말 기쁩니다. 저희 바는 좋은 술과 분위기를 사랑하는 사람들에게 진정성 있는 경험을 선사하고자 만들어졌습니다.
+            사실, 요즘 많은 바들이 비싸고, 때로는 그 가격에 비해 맛이 아쉬운 경우가 많죠. 저도 그런 경험을 많이 했습니다. 그래서 가격이 합리적이면서도 맛과 품질이 확실한 술을 제공하는 정직함을 바탕으로 운영
+            되는 공간이 필요하다고 느껴 저는 저만의 바를 열기로 결심했고 실천했습니다.<br><br>수십 가지가 넘는 여러 종류의 술과 시그니처·클래식 칵테일까지, 모든 술을 만드는 과정에서 세심하게 신경을 쓰고, 항상
+            신선한 재료만을 사용하면서 합리적인 가격과 맛을 보장합니다. 그리고 더 브라운 바는 편안하고 아늑한 분위기를 자랑합니다. 고급스러우면서도 부담스럽지 않은, 여러분이 편안하게 즐기실 수 있도록 디자인되었습니다.
+            바의 이름에서 느껴지는 따뜻하고 깊이 있는 느낌처럼, 여기서는 어떤 고민도 잠시 내려놓고, 진지하게 즐길 수 있는 시간이 기다리고 있습니다.<br><br> 물론 바텐더인 저도 고객 한 분 한 분을 소중히 여기며,
+            여러분의 취향을 존중합니다. 단순히 판매되는 음료가 아닌, 여러분의 입맛에 맞는 완벽한 음료를 제공하는 것이 저희의 목표이죠. 여러분에게 딱 맞는 술이나 칵테일을 추천해드리고, 새롭고 특별한 음료를 제안
+            드리겠습니다. 술에 대하여 궁금한 것이나 여러 이야기를 나누고 싶다면 언제든 저에게 말씀해 주세요.<br><br> 이처럼 '더 브라운 바'에서만 느낄 수 있는 특별한 경험을 원하신다면, 언제든지 오셔서 저희와 함께 좋은
+            시간을 보내주세요, 기다리고 있겠습니다.</p>
+    </section>
+
+    <div class="footer">
+        <p>© 2025 The Brown Bar. All rights reserved.</p>
+    </div>
+
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const mainMenu = document.getElementById('mainMenu');
+        menuToggle.addEventListener('click', () => {
+            mainMenu.classList.toggle('active');
+        });
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 800) {
+                mainMenu.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
