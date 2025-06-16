@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Brown Bar - 오시는 길</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+            color: #f1f1f1;
+        }
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #000000;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            height: 50px;
+        }
+        .brand a {
+            font-size: 1.8em;
+            color: #7a4b3b;
+            text-decoration: none;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .brand a:hover {
+            color: #f1f1f1;
+        }
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #f1f1f1;
+            font-size: 2em;
+            cursor: pointer;
+            padding: 5px;
+            margin-left: auto;
+            margin-right: 30px;
+        }
+        .navbar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50px;
+            margin-right: 30px;
+        }
+        .navbar ul.main-menu {
+            height: auto;
+        }
+        .navbar li {
+            margin: 0 20px;
+        }
+        .navbar a {
+            color: #f1f1f1;
+            text-decoration: none;
+            font-size: 1.2em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .navbar a:hover {
+            color: #7a4b3b;
+        }
+        header {
+            background-image: url('basic/headerimg.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 50px 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            margin-top: 50px;
+        }
+        header img {
+            max-width: 220px;
+            width: 100%;
+            height: auto;
+        }
+        section {
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .map-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 10px 0;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #1a1a1a;
+            color: #ccc;
+        }
+        @media (max-width: 800px) {
+            .navbar {
+                flex-wrap: wrap;
+            }
+            .navbar ul.main-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 50px;
+                left: 0;
+                width: 100%;
+                background-color: #000000;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+                padding: 10px 0;
+                z-index: 999;
+                text-align: center;
+            }
+            .navbar ul.main-menu.active {
+                display: flex;
+                justify-content: flex-start;
+                align-items: flex-start;
+                padding-left: 20px;
+            }
+            .navbar ul.main-menu li {
+                margin: 10px 0;
+                width: 100%;
+                text-align: left;
+            }
+            .navbar a {
+                font-size: 1.1em;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            h1 {
+                font-size: 2.5em;
+                letter-spacing: 2px;
+            }
+            h3 {
+                font-size: 1em;
+                word-break: keep-all;
+                padding: 0 10px;
+            }
+            .map-container {
+                width: 100%;
+                display: block;
+            }
+            .map-container > div {
+                width: 100% !important;
+                height: auto !important;
+            }
+            .map-container > div > div:first-child {
+                height: auto !important;
+                padding-bottom: 56.25%;
+                position: relative;
+            }
+            .map-container > div > div:first-child img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100% !important;
+                height: 100% !important;
+            }
+            .map-container > div > div:last-child {
+                width: 100% !important;
+                box-sizing: border-box;
+            }
+            .map-container > div > div:last-child a,
+            .map-container > div > div:last-child span {
+                font-size: 10px !important;
+                margin: 0 5px 0 6px !important;
+            }
+        }
+        @media (max-width: 480px) {
+            .brand a {
+                font-size: 1.5em;
+                letter-spacing: 0.5px;
+            }
+            .navbar a {
+                font-size: 1em;
+            }
+            h1 {
+                font-size: 1.5em;
+            }
+            h2 {
+                font-size: 1.1em;
+            }
+            h3 {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <div class="brand">
+            <a href="index.html">THE BROWN BAR</a>
+        </div>
+        <button class="menu-toggle" id="menuToggle">☰</button>
+        <ul class="main-menu" id="mainMenu">
+            <li><a href="introduce.html"><b>매장소개</b></a></li>
+            <li><a href="menu.html"><b>메뉴</b></a></li>
+            <li><a href="news.html"><b>새소식</b></a></li>
+            <li><a href="location.html" style="color: #7a4b3b;"><b>오시는길</b></a></li>
+            <li><a href="words.html"><b>바텐더의 말</b></a></li>
+        </ul>
+    </div>
+
+    <header id="header">
+        <a href="index.html">
+            <img src="basic/logo.jpg" alt="The Brown Bar Logo">
+        </a>
+    </header>
+    <h1 style="text-align:center;">오시는길</h1>
+    <section>
+        <div class="map-container" id="map-container">
+            <div style="font: normal normal 400 12px/normal dotum, sans-serif; width: 640px; height: 392px; color: #333; position: relative;">
+                <div style="height: 360px;">
+                    <a href="https://map.kakao.com/?urlX=482060.0&urlY=1139148.0&itemId=1588354927&q=%EB%8D%94%EB%B8%8C%EB%9D%BC%EC%9A%B4%EB%B0%94&srcid=1588354927&map_type=TYPE_MAP&from=roughmap" target="_blank">
+                        <img class="map" src="http://t1.daumcdn.net/roughmap/imgmap/f597d060699248cedd4a5dfd701afe2e1b40400e828ad81fa56cecef639b6bb0" style="border:1px solid #ccc;">
+                    </a>
+                </div>
+                <div style="overflow: hidden; padding: 7px 11px; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 0px 0px 2px 2px; background-color: rgb(249, 249, 249);">
+                    <a href="https://map.kakao.com" target="_blank" style="float: left;">
+                    </a>
+                    <div style="float: right; position: relative; top: 1px; font-size: 11px;">
+                        <a target="_blank" href="https://map.kakao.com/?from=roughmap&srcid=1588354927&confirmid=1588354927&q=%EB%8D%94%EB%B8%8C%EB%9D%BC%EC%9A%B4%EB%B0%94&rv=on" style="float:left;height:15px;padding-top:1px;line-height:15px;color:#000;text-decoration: none;">로드뷰</a>
+                        <span style="width: 1px;padding: 0;margin: 0 8px 0 9px;height: 11px;vertical-align: top;position: relative;top: 2px;border-left: 1px solid #d0d0d0;float: left;"></span>
+                        <a target="_blank" href="https://map.kakao.com/?from=roughmap&eName=%EB%8D%94%EB%B8%8C%EB%9D%BC%EC%9A%B4%EB%B0%94&eX=482060.0&eY=1139148.0" style="float:left;height:15px;padding-top:1px;line-height:15px;color:#000;text-decoration: none;">길찾기</a>
+                        <span style="width: 1px;padding: 0;margin: 0 8px 0 9px;height: 11px;vertical-align: top;position: relative;top: 2px;border-left: 1px solid #d0d0d0;float: left;"></span>
+                        <a target="_blank" href="https://map.kakao.com?map_type=TYPE_MAP&from=roughmap&srcid=1588354927&itemId=1588354927&q=%EB%8D%94%EB%B8%8C%EB%9D%BC%EC%9A%B4%EB%B0%94&urlX=482060.0&urlY=1139148.0" style="float:left;height:15px;padding-top:1px;line-height:15px;color:#000;text-decoration: none;">지도 크게 보기</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <p>응암역 3번출구에서 도보로 약5분</p>
+        <p>서울 은평구 진흥로 29 지하1층</p>
+        <p>주차는 근처 응암1동 공영주차장을 이용하시면 됩니다.</p>
+    </section>
+
+    <div class="footer">
+        <p>© 2025 The Brown Bar. All rights reserved.</p>
+    </div>
+
+    <script>
+        window.onload = function() {
+            document.getElementById('header').style.backgroundImage = "url('basic/headerimg.jpg')";
+            var mapContainer = document.getElementById('map-container');
+            mapContainer.style.opacity = 1;
+        };
+        const menuToggle = document.getElementById('menuToggle');
+        const mainMenu = document.getElementById('mainMenu');
+        menuToggle.addEventListener('click', () => {
+            mainMenu.classList.toggle('active');
+        });
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 800) {
+                mainMenu.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
